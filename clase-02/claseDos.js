@@ -1,5 +1,5 @@
 const primeraEntrada = parseInt(prompt("Ingresa la temperatura actual"));
-const segundaEntrada = prompt("Está lloviendo? S/N")
+const segundaEntrada = prompt("Está lloviendo? S/N");
 
 if ((primeraEntrada >= 17) && ((segundaEntrada == "S") || (segundaEntrada == "s"))) {
   alert("Afuera está húmedo y hace calor! Lleva paraguas ☔");
