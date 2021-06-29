@@ -10,4 +10,5 @@ function descuentoTotal(precioOriginal, descuento) {
 }
 
 alert("El precio despues del descuento es $" + nuevoPrecio(precioOriginal, descuento));
+
 console.log("El total de la rebaja es $" + descuentoTotal(precioOriginal, descuento));
