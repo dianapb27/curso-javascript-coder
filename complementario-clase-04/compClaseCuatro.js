@@ -9,6 +9,9 @@ function descuentoTotal(precioOriginal, descuento) {
   return precioOriginal * (descuento / 100);
 }
 
-alert("El precio despues del descuento es $" + nuevoPrecio(precioOriginal, descuento));
+function calcularPrecio(precioOriginal, descuento) {
+  alert("El precio despues del descuento es $" + nuevoPrecio(precioOriginal, descuento));
+  console.log("El total de la rebaja es $" + descuentoTotal(precioOriginal, descuento));
+}
 
-console.log("El total de la rebaja es $" + descuentoTotal(precioOriginal, descuento));
+calcularPrecio(precioOriginal, descuento);
