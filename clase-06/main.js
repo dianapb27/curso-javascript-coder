@@ -11,8 +11,11 @@ class Warehouse {
   calculateTotalPrice(numberOfDays) {
     return this.pricePerDay * numberOfDays * 1.025;
   }
+  calculateServiceFee(numberOfDays) {
+    return this.pricePerDay * numberOfDays * 0.025;
+  }
   warehouseInfo() {
-    return `Name: ${this.name}, Address: ${this.address}, Price per day: $${this.pricePerDay}, Available: ${this.available == true ? "Yes" : "No"}`;
+    return `Name: ${this.name}, Address: ${this.address}, Price per day: $${this.pricePerDay}, Available: ${this.available == true ? "Yes" : "No"}\n`;
   }
 }
 
@@ -24,8 +27,17 @@ function addWarehouse() {
 }
 
 let warehouses = [];
-let userSelection = prompt("Press 1 to add a warehouse, 2 to see all warehouses, anything else to exit");
-let displayWarehouses = "LIST OF WAREHOUSES\n";
+const warehouse1 = new Warehouse("Lynn Warehouses", "123 Main St", 200);
+warehouses.push(warehouse1);
+const warehouse2 = new Warehouse("Green Roof", "456 Kinzie St", 146);
+warehouses.push(warehouse2);
+const warehouse3 = new Warehouse("Hubbard", "221 Hubbard St", 250);
+warehouse3.rent();
+warehouses.push(warehouse3);
+
+
+let userSelection = prompt("Press 1 to add a warehouse, 2 to rent a warehouse, anything else to exit");
+let displayWarehouses = "Warehouses in SafeSpace:\n";
 
 while (userSelection == "1") {
   warehouses.push(addWarehouse());
@@ -33,19 +45,24 @@ while (userSelection == "1") {
 }
 
 if (userSelection == "2") {
-  let warehousesInList = warehouses.length;
-  if (warehousesInList > 0) {
-    for (const warehouse of warehouses) {
+  if (warehouses.length > 0) {
+    let availableWarehouses = warehouses.filter(warehouse => warehouse.available == true);
+    for (const warehouse of availableWarehouses) {
       displayWarehouses += warehouse.warehouseInfo();
     }
-    let selectedWarehouse = prompt(`Please type the name of your selected warehouse from the list\n${displayWarehouses}`);
-    warehouses.find()
+    const selectedWarehouseName = prompt(`Please type the name of your selected warehouse from the list\n${displayWarehouses}`);
+    const warehouseMatch = warehouses.find(warehouse => warehouse.name == selectedWarehouseName.toUpperCase());
+    if (warehouseMatch) {
+      const totalDays = Number(prompt("How many days will you be renting this warehouse?"));
+      warehouseMatch.rent();
+      alert(`Your total is $${warehouseMatch.calculateTotalPrice(totalDays)}`);
+      console.log(`Thank you for using SafeSpace to rent ${warehouseMatch.name}! SafeSpace only collected $${warehouseMatch.calculateServiceFee(totalDays)} for this transaction`);
+      console.log(`Your selection: ${warehouseMatch.warehouseInfo()}Number of Days: ${totalDays}`);
+    } else {
+      alert("You didn't pick a valid warehouse");
+    }
+    
   } else {
     alert("There are no warehouses");
   }
 }
-
-// const warehouse1 = new Warehouse("Lynn Warehouses", "123 Main St", 200);
-// const warehouse2 = new Warehouse("Green Roof", "456 Kinzie St", 146);
-
-// const userSelection = prompt(`Select a warehouse:\n`)
