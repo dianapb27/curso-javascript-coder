@@ -35,7 +35,6 @@ const warehouse3 = new Warehouse("Hubbard", "221 Hubbard St", 250);
 warehouse3.rent();
 warehouses.push(warehouse3);
 
-
 let userSelection = prompt("Press 1 to add a warehouse, 2 to rent a warehouse, anything else to exit");
 let displayWarehouses = "Warehouses in SafeSpace:\n";
 
@@ -61,7 +60,6 @@ if (userSelection == "2") {
     } else {
       alert("You didn't pick a valid warehouse");
     }
-    
   } else {
     alert("There are no warehouses");
   }
