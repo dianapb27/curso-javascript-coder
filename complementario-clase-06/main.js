@@ -29,12 +29,12 @@ for (const persona of personas) {
   listaPersonas += persona.infoPersona();
 }
 
-const campoSeleccionado = prompt(`Selecciona un campo (nombre, apellido, edad, valor) para ordenar la siguiente lista\n${listaPersonas}`);
+const campoSeleccionado = prompt(`Selecciona una opcion para ordenar la lista:\n1 por nombre, 2 por apellido, 3 por edad o 4 por valor neto.\n${listaPersonas}`);
 const orden = prompt("Selecciona 1 para ascendente, 2 para descendente");
 
 listaPersonas = [];
-switch(campoSeleccionado.toLowerCase()) {
-  case "nombre":
+switch(campoSeleccionado) {
+  case "1":
     if (orden == "1") {
       const listaOrdenadaAscendente = personas.sort((a,b) => {
         return (a.nombre > b.nombre) ? 1 : -1;
@@ -42,7 +42,7 @@ switch(campoSeleccionado.toLowerCase()) {
       for (const persona of listaOrdenadaAscendente) {
         listaPersonas += persona.infoPersona();
       }
-      alert(`Aqui esta la lista en orden ascendente por ${campoSeleccionado}:\n${listaPersonas}`);
+      alert(`Aqui esta la lista en orden ascendente por nombre:\n${listaPersonas}`);
     } else {
       const listaOrdenadaDescendente = personas.sort((a,b) => {
         return (b.nombre > a.nombre) ? 1 : -1;
@@ -50,10 +50,10 @@ switch(campoSeleccionado.toLowerCase()) {
       for (const persona of listaOrdenadaDescendente) {
         listaPersonas += persona.infoPersona();
       }
-      alert(`Aqui esta la lista en orden descendente por ${campoSeleccionado}:\n${listaPersonas}`);
+      alert(`Aqui esta la lista en orden descendente por nombre:\n${listaPersonas}`);
     }
     break;
-  case "apellido":
+  case "2":
     if (orden == "1") {
       const listaOrdenadaAscendente = personas.sort((a,b) => {
         return (a.apellido > b.apellido) ? 1 : -1;
@@ -61,7 +61,7 @@ switch(campoSeleccionado.toLowerCase()) {
       for (const persona of listaOrdenadaAscendente) {
         listaPersonas += persona.infoPersona();
       }
-      alert(`Aqui esta la lista en orden ascendente por ${campoSeleccionado}:\n${listaPersonas}`);
+      alert(`Aqui esta la lista en orden ascendente por apellido:\n${listaPersonas}`);
     } else {
       const listaOrdenadaDescendente = personas.sort((a,b) => {
         return (b.apellido > a.apellido) ? 1 : -1;
@@ -69,10 +69,10 @@ switch(campoSeleccionado.toLowerCase()) {
       for (const persona of listaOrdenadaDescendente) {
         listaPersonas += persona.infoPersona();
       }
-      alert(`Aqui esta la lista en orden descendente por ${campoSeleccionado}:\n${listaPersonas}`);
+      alert(`Aqui esta la lista en orden descendente por apellido:\n${listaPersonas}`);
     }
     break;
-  case "edad":
+  case "3":
     if (orden == "1") {
       const listaOrdenadaAscendente = personas.sort((a,b) => {
         return (a.edad > b.edad) ? 1 : -1;
@@ -80,7 +80,7 @@ switch(campoSeleccionado.toLowerCase()) {
       for (const persona of listaOrdenadaAscendente) {
         listaPersonas += persona.infoPersona();
       }
-      alert(`Aqui esta la lista en orden ascendente por ${campoSeleccionado}:\n${listaPersonas}`);
+      alert(`Aqui esta la lista en orden ascendente por edad:\n${listaPersonas}`);
     } else {
       const listaOrdenadaDescendente = personas.sort((a,b) => {
         return (b.edad > a.edad) ? 1 : -1;
@@ -88,10 +88,10 @@ switch(campoSeleccionado.toLowerCase()) {
       for (const persona of listaOrdenadaDescendente) {
         listaPersonas += persona.infoPersona();
       }
-      alert(`Aqui esta la lista en orden descendente por ${campoSeleccionado}:\n${listaPersonas}`);
+      alert(`Aqui esta la lista en orden descendente por edad:\n${listaPersonas}`);
     }
     break;
-  case "valor":
+  case "4":
     if (orden == "1") {
       const listaOrdenadaAscendente = personas.sort((a,b) => {
         return (a.valorNeto > b.valorNeto) ? 1 : -1;
@@ -99,7 +99,7 @@ switch(campoSeleccionado.toLowerCase()) {
       for (const persona of listaOrdenadaAscendente) {
         listaPersonas += persona.infoPersona();
       }
-      alert(`Aqui esta la lista en orden ascendente por ${campoSeleccionado}:\n${listaPersonas}`);
+      alert(`Aqui esta la lista en orden ascendente por valor neto:\n${listaPersonas}`);
     } else {
       const listaOrdenadaDescendente = personas.sort((a,b) => {
         return (b.valorNeto > a.valorNeto) ? 1 : -1;
@@ -107,7 +107,7 @@ switch(campoSeleccionado.toLowerCase()) {
       for (const persona of listaOrdenadaDescendente) {
         listaPersonas += persona.infoPersona();
       }
-      alert(`Aqui esta la lista en orden descendente por ${campoSeleccionado}:\n${listaPersonas}`);
+      alert(`Aqui esta la lista en orden descendente por valor neto:\n${listaPersonas}`);
     }
     break;  
   default:
