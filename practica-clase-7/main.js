@@ -16,27 +16,30 @@ class Usuario {
 }
 
 // Funciones ----------------------
+function imprimirUsuario(usuario) {
+  return `${usuario.nombre} ${usuario.telefono}`
+}
+
 function pedirDatos() {
   const nombre = prompt("Ingresa nombre");
   const apellido = prompt("Ingresa apellido");
   const email = prompt("Ingresa email");
   const telefono = prompt("Ingresa telefono");
   const usuario1 = new Usuario(nombre, apellido, email, telefono);
-  const json = JSON.stringify(usuario1);
-  guardarUsuario("usuario1", json);
+  guardarUsuario("usuario1", usuario1);
+  console.log(imprimirUsuario(usuario1));
 }
 
-function guardarUsuario(a, b) {
-  localStorage.setItem(a, b);
+function guardarUsuario(clave, valor) {
+  const json = JSON.stringify(valor);
+  localStorage.setItem(clave, json);
 }
 
-function descargar(a) {
-  return JSON.parse(localStorage.getItem(a));
+function descargar(usuario) {
+  return JSON.parse(localStorage.getItem(usuario));
 }
 
-function imprimirUsuario (a) {
-  return `${a.nombre} ${a.telefono}`
-}
+// Logica----------------------------------
 
 let nuevoUsuario = descargar("usuario1");
 
