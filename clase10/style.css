@@ -1,0 +1,11 @@
+#main-header {
+  color: teal;
+}
+
+.unavailable {
+  color: maroon;
+}
+
+.hidden {
+  display: none;
+}
