@@ -12,15 +12,17 @@
 <body>
 
   <div class="container">
-    <h1 id="main-header" class="my-5 text-center">Welcome to BeautyStore</h1>
-    <h4 class="text-center my-3">Where you can find products to make you feel and look beautiful</h4>
+    <div class="jumbotron">
+      <h1 id="main-header" class="display-4 my-3">Welcome to BeautyStore</h1>
+      <h4 class="lead my-3">Where you can find products to make you feel and look beautiful</h4>
+    </div>
   </div>
 
-  <div class="container text-center">
-    <button id="show-form" class="btn btn-info mb-2">Press to add products</button>
+  <div class="container">
+    <button id="show-form" class="btn btn-info mb-2">Click to add products</button>
   </div>
 
-  <div id="new-product-form" class="container w-50 my-5">
+  <div id="new-product-form" class="container w-50 my-3">
     <form id="add-product-form" class="hidden">
       <input type="text" id="product-name" class="form-control mb-2" autocomplete="off" placeholder="Name">
       <p id="name-ref" class="form-text d-none">Enter the name of the product</p>
@@ -43,8 +45,8 @@
   </div>
 
   <div class="container">
-    <h3>These are the products we have in stock:</h3>
-    <div id="available">
+    <h4>These are the products we have in stock:</h4>
+    <div class="row" id="available">
     </div>
   </div>
 

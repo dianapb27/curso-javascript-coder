@@ -10,12 +10,6 @@ class Product {
     this.quantity = Number(quantity);
     this.id = Number(id);
   }
-  calculateTotalPrice(quantityToPurchase) {
-    return this.price * quantityToPurchase * 1.025;
-  }
-  calculateServiceFee(quantityToPurchase) {
-    return this.price * quantityToPurchase * 0.025;
-  }
 }
 
 // Selectors
@@ -49,12 +43,12 @@ const quantityRef = document.getElementById("quantity-ref");
 // Show and hide add product form
 function showForm() {
   document.getElementById("add-product-form").classList.toggle("hidden");
-  if (showFormBtn.textContent == "Press to add products") {
-    showFormBtn.textContent = "Press to hide";
+  if (showFormBtn.textContent == "Click to add products") {
+    showFormBtn.textContent = "Click to hide";
     showFormBtn.classList.remove("btn-info");
     showFormBtn.classList.add("btn-secondary");
   } else {
-    showFormBtn.textContent = "Press to add products";
+    showFormBtn.textContent = "Click to add products";
     showFormBtn.classList.add("btn-info");
     showFormBtn.classList.remove("btn-secondary");
   } 
@@ -66,6 +60,11 @@ function saveProductsList(productsList) {
   displayProducts(productsList);
 }
 
+// Save the basket in session storage
+function saveBasket(productsAdded) {
+  sessionStorage.setItem("basket", JSON.stringify(productsAdded));
+}
+
 // Load the products in local storage or make it an empty array
 function loadProducts() {
   let productsList = JSON.parse(localStorage.getItem("productsList"));
@@ -74,6 +73,34 @@ function loadProducts() {
   } else {
     return productsList;
   }
+}
+
+// Load the basket from session storage or make it an empty array
+function loadBasket() {
+  let basket = JSON.parse(sessionStorage.getItem("basket"));
+  if (basket == null) {
+    return [];
+  } else {
+    return basket;
+  }
+}
+
+// Generate an id by adding 1 to the highest existing id
+function generateId() {
+  let products = loadProducts();
+  let ids = products.reduce((a, c) => (a[c.id] = c, a), {});
+  let largestId = Math.max(...Object.keys(ids));
+  return largestId + 1;
+}
+
+// Calculate total price
+function calculateTotal() {
+  let basket = loadBasket();
+  let total = 0;
+  for (const product of basket) {
+    total += product.price
+  }
+  return total
 }
 
 // Add products
@@ -88,8 +115,7 @@ function addProduct(e) {
   let newProductQuantity = document.getElementById("product-quantity").value;
 
   let productsList = loadProducts();
-  let newProductId = productsList.length + 1;
-  console.log(newProductId);
+  let newProductId = generateId();
   let newProduct = new Product(newProductName, newProductDescription, newProductType, newProductColor, newProductBrand, newProductPrice, newProductQuantity, newProductId);
   productsList.push(newProduct);
   saveProductsList(productsList);
@@ -97,14 +123,23 @@ function addProduct(e) {
   displayProducts(productsList);
 }
 
-// Subtract one from the available qty
+// Add 1 unit to the basket and subtract one from the available qty
+function addtoBasket(productsList, productId) {
+  let basket = loadBasket();
+  let productMatch = productsList.find(product => product.id == productId);
+  productMatch.quantity = 1;
+  basket.push(productMatch);
+  saveBasket(basket);
+  console.log(`You added 1 ${productMatch.name} to your basket`);
+}
 function sellProduct(productId) {
   let productsList = loadProducts();
   let productMatch = productsList.find(product => product.id == productId);
-  console.log(productMatch);
   productMatch.quantity -= 1;
   saveProductsList(productsList);
   displayProducts(productsList);
+  addtoBasket(productsList, productId);
+  console.log(`Your total so far is $${calculateTotal()}`);
 }
 
 // Create a card for each product
@@ -112,6 +147,7 @@ function createProductCard(product) {
   const card = document.createElement("div");
   card.classList.add("card");
   card.setAttribute("style", "width: 18rem");
+  card.classList.add("m-3");
 
   const productName = document.createElement("h4");
   productName.textContent = `${product.name}`
@@ -134,7 +170,7 @@ function createProductCard(product) {
 
   const buyProduct = document.createElement("button");
   buyProduct.setAttribute("id", `btn-${product.id}`);
-  buyProduct.setAttribute("onclick", `sellProduct(${product.id})`)
+  buyProduct.setAttribute("onclick", `sellProduct(${product.id})`);
   buyProduct.textContent = "Buy 1";
   buyProduct.setAttribute("class", "btn btn-outline-success");
   card.appendChild(buyProduct);
@@ -198,7 +234,7 @@ function hideRefQuantity() {
 
 // Event listeners ----------------------------------------------------------------------
 
-// Showing product form
+// Showing add product form
 showFormBtn.addEventListener("click", showForm);
 
 // Adding a product
