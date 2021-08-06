@@ -1,0 +1,28 @@
+.box {
+  width: 200px;
+  height: 200px;
+}
+
+#box1 {
+  background-color: mediumaquamarine;
+}
+
+#box2 {
+  background-color: palevioletred;
+  display: none;
+}
+
+#box3 {
+  background-color: blueviolet;
+}
+
+#box4 {
+  background-color: darkcyan;
+}
+
+.btn {
+  background-color: darkred;
+  color: white;
+  width: 100px;
+  margin-top: 10px;
+}
