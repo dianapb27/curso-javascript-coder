@@ -250,7 +250,7 @@ function hideRefQuantity() {
 showFormBtn.addEventListener("click", showForm);
 
 // Adding a product
-addProductBtn.addEventListener("click", addProduct);
+addProductForm.addEventListener("submit", addProduct);
 
 // Show and hide form references
 nameInput.addEventListener("focus", displayRefName);
