@@ -146,11 +146,17 @@ function sellProduct(productId) {
 function createProductCard(product) {
   const card = document.createElement("div");
   card.classList.add("card");
+  if (localStorage.getItem("theme") == "dark") {
+    card.classList.add("bg-dark");
+  }
   card.setAttribute("style", "width: 18rem");
   card.classList.add("m-3");
 
   const productName = document.createElement("h4");
-  productName.textContent = `${product.name}`
+  productName.textContent = `${product.name}`;
+  if (localStorage.getItem("theme") == "dark") {
+    productName.classList.add("text-white");
+  }
   card.appendChild(productName);
 
   const productPriceAndAvailability = document.createElement("div");
@@ -161,17 +167,23 @@ function createProductCard(product) {
   const productDescription = document.createElement("div");
   productDescription.textContent = `${product.description}`;
   productDescription.setAttribute("class", "card-text");
+  if (localStorage.getItem("theme") == "dark") {
+    productDescription.classList.add("text-light");
+  }
   card.appendChild(productDescription);
 
   const productDetails = document.createElement("div");
   productDetails.textContent = `Type: ${product.type} | Brand: ${product.brand} | Color: ${product.color}`;
   productDetails.setAttribute("class", "card-text");
+  if (localStorage.getItem("theme") == "dark") {
+    productDetails.classList.add("text-light");
+  }
   card.appendChild(productDetails);
 
   const buyProduct = document.createElement("button");
   buyProduct.setAttribute("id", `btn-${product.id}`);
   buyProduct.setAttribute("onclick", `sellProduct(${product.id})`);
-  buyProduct.textContent = "Buy 1";
+  buyProduct.textContent = "Add 1 to basket";
   buyProduct.setAttribute("class", "btn btn-outline-success");
   card.appendChild(buyProduct);
   
