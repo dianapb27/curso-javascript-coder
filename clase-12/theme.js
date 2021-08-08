@@ -35,7 +35,7 @@ function changeTheme() {
 $("#theme").click(changeTheme);
 
 if (localStorage.getItem("theme") == "light") {
-  darkMode();
-} else {
   lightMode();
+} else {
+  darkMode();
 }
