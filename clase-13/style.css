@@ -1,0 +1,14 @@
+.boton {
+  width: 150px;
+  margin-right: 20px;
+}
+
+#cuadro {
+  position: absolute;
+  background-color: gray;
+  top: 300px;
+  left: 400px;
+  width: 90px;
+  height: 90px;
+  margin: 50px;
+}
