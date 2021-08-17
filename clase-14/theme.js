@@ -22,6 +22,7 @@ function lightMode() {
   $(".card").removeClass("bg-dark");
   $(".card-text").removeClass("text-light");
   $("input").removeClass("bg-dark text-light");
+  $("select").removeClass("bg-dark text-light");
   localStorage.setItem("theme", "light");
 }
 
