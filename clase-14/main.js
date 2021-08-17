@@ -38,6 +38,8 @@ const priceRef = document.getElementById("price-ref");
 const quantityInput = document.getElementById("product-quantity");
 const quantityRef = document.getElementById("quantity-ref");
 
+const showProductsBtn = document.querySelector("#show-products");
+
 // Variables
 const jsonPath = "./assets/products.json";
 
@@ -74,6 +76,7 @@ function saveBasket(productsAdded) {
 
 // Load the products from local JSON file
 function loadExistingProducts() {
+  showProductsBtn.classList.add("d-none");
   let productsList = [];
   $.getJSON(jsonPath, function (response, status) {
     if (status === "success") {
@@ -306,6 +309,9 @@ showFormBtn.addEventListener("click", showForm);
 // Adding a product
 requestProductForm.addEventListener("submit", requestProduct);
 
+// Getting the list of available products from JSON file
+showProductsBtn.addEventListener("click", loadExistingProducts)
+
 // Show and hide form references
 nameInput.addEventListener("focus", displayRefName);
 nameInput.addEventListener("blur", hideRefName);
@@ -324,7 +330,6 @@ quantityInput.addEventListener("blur", hideRefQuantity);
 
 if (JSON.parse(localStorage.getItem("existingProducts")) != null) {
   displayAvailableProducts(JSON.parse(localStorage.getItem("existingProducts")));
-} else {
-  loadExistingProducts();
+  showProductsBtn.classList.add("d-none");
 }
 displayRequestedProducts(loadRequestedProducts());
