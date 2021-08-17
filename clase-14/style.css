@@ -1,0 +1,16 @@
+#main-header {
+  color: teal;
+}
+
+.unavailable {
+  color: maroon;
+}
+
+.hidden {
+  display: none;
+}
+
+#theme-btn {
+  height: 50px;
+  margin-top: 50px;
+}
