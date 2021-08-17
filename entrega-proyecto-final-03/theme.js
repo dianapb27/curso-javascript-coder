@@ -1,6 +1,11 @@
 function darkMode() {
-  $("#theme-btn").empty()
-             .append('<i class="fas fa-sun"></i>');
+  $("#theme-btn").fadeOut(200, function() {
+    $("#theme-btn").fadeIn(200);
+  })
+                 .delay(200)
+                 .css("color", "white")
+                 .empty()
+                 .append('<i class="fas fa-sun"></i>');
   $("body").css("background-color", "black");
   $("h1").css("color", "aquamarine");
   $("h4").addClass("text-white");
@@ -12,8 +17,13 @@ function darkMode() {
 }
 
 function lightMode() {
-  $("#theme-btn").empty()
-             .append('<i class="fas fa-moon"></i>')
+  $("#theme-btn").fadeOut(200, function() {
+    $("#theme-btn").fadeIn(200);
+  })
+                 .delay(200)
+                 .css("color", "black")
+                 .empty()
+                 .append('<i class="fas fa-moon"></i>');
   $("body").css("background-color", "white");
   $("h1").css("color", "teal");
   $("h4").removeClass("text-white");
