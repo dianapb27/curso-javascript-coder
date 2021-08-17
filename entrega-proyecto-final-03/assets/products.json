@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+    "name": "Eyeshadow palette",
+    "description": "Beautiful tarte eyeshadow palette with earthy tones",
+    "type": "Makeup",
+    "color": "Earthy",
+    "brand": "Tarte",
+    "price": 500,
+    "quantity": 3,
+    "id": 1
+    },
+    {
+      "name": "The Ordinary's niacinamide",
+      "description": "Niacinamide serum to help get rid of acne",
+      "type": "Skincare",
+      "color": "Clear",
+      "brand": "The Ordinary",
+      "price": 300,
+      "quantity": 5,
+      "id": 2
+    },
+    {
+      "name": "Red lipstick",
+      "description": "Matte lipstick that does not dry your lips",
+      "type": "Makeup",
+      "color": "Red",
+      "brand": "Coulourpop",
+      "price": 100,
+      "quantity": 2,
+      "id": 3
+    },
+    {
+      "name": "Ouai detox shampoo",
+      "description": "Great shampoo to detox your scalp",
+      "type": "Hair",
+      "color": "White",
+      "brand": "Ouai",
+      "price": 450,
+      "quantity": 3,
+      "id": 4
+    }
+  ]
+}
