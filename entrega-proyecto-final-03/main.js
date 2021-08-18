@@ -310,7 +310,7 @@ showFormBtn.addEventListener("click", showForm);
 // Adding a product
 requestProductForm.addEventListener("submit", requestProduct);
 
-// Getting the list of available products from JSON file
+// Getting the initial list of available products from JSON file
 showProductsBtn.addEventListener("click", loadExistingProducts);
 
 // Show and hide form references
