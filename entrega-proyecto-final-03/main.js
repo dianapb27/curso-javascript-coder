@@ -38,6 +38,8 @@ const priceRef = document.getElementById("price-ref");
 const quantityInput = document.getElementById("product-quantity");
 const quantityRef = document.getElementById("quantity-ref");
 
+const showProductsBtn = document.querySelector("#show-products");
+
 // Variables
 const jsonPath = "./assets/products.json";
 
@@ -46,12 +48,12 @@ const jsonPath = "./assets/products.json";
 // Show and hide add product form
 function showForm() {
   requestProductForm.classList.toggle("hidden");
-  if (showFormBtn.textContent == "Click to request products") {
-    showFormBtn.textContent = "Click to hide";
+  if (showFormBtn.textContent == "Request products") {
+    showFormBtn.textContent = "Hide";
     showFormBtn.classList.remove("btn-info");
     showFormBtn.classList.add("btn-secondary");
   } else {
-    showFormBtn.textContent = "Click to request products";
+    showFormBtn.textContent = "Request products";
     showFormBtn.classList.add("btn-info");
     showFormBtn.classList.remove("btn-secondary");
   } 
@@ -74,6 +76,7 @@ function saveBasket(productsAdded) {
 
 // Load the products from local JSON file
 function loadExistingProducts() {
+  showProductsBtn.classList.add("d-none");
   let productsList = [];
   $.getJSON(jsonPath, function (response, status) {
     if (status === "success") {
@@ -146,6 +149,7 @@ function requestProduct(e) {
   saveRequestedProductsList(productsList);
   requestProductForm.reset();
   displayRequestedProducts(productsList);
+  console.log("Our team will work on finding your product!");
 }
 
 // Add 1 unit to the basket and subtract one from the available qty
@@ -174,7 +178,7 @@ function createProductCard(product) {
   if (localStorage.getItem("theme") == "dark") {
     card.classList.add("bg-dark");
   }
-  card.setAttribute("style", "width: 18rem");
+  card.setAttribute("style", "width: 25rem");
   card.classList.add("m-3");
 
   const productName = document.createElement("h4");
@@ -186,7 +190,7 @@ function createProductCard(product) {
 
   const productPriceAndAvailability = document.createElement("div");
   if (loadRequestedProducts().find(requested => requested.name == product.name)) {
-    productPriceAndAvailability.textContent = `Willing to pay $${product.price} | Requested: ${product.quantity}`;
+    productPriceAndAvailability.textContent = `Willing to pay: $${product.price} | Requested: ${product.quantity}`;
   } else {
     productPriceAndAvailability.textContent = `$${product.price} | Available: ${product.quantity}`;
   }
@@ -306,6 +310,9 @@ showFormBtn.addEventListener("click", showForm);
 // Adding a product
 requestProductForm.addEventListener("submit", requestProduct);
 
+// Getting the list of available products from JSON file
+showProductsBtn.addEventListener("click", loadExistingProducts);
+
 // Show and hide form references
 nameInput.addEventListener("focus", displayRefName);
 nameInput.addEventListener("blur", hideRefName);
@@ -324,7 +331,6 @@ quantityInput.addEventListener("blur", hideRefQuantity);
 
 if (JSON.parse(localStorage.getItem("existingProducts")) != null) {
   displayAvailableProducts(JSON.parse(localStorage.getItem("existingProducts")));
-} else {
-  loadExistingProducts();
+  showProductsBtn.classList.add("d-none");
 }
 displayRequestedProducts(loadRequestedProducts());

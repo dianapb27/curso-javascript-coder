@@ -39,6 +39,16 @@
       "price": 450,
       "quantity": 3,
       "id": 4
+    },
+    {
+      "name": "Cool wine cooler",
+      "description": "Just add ice and your wine will chill",
+      "type": "Other",
+      "color": "Pink",
+      "brand": "Wine not?",
+      "price": 250,
+      "quantity": 1,
+      "id": 5
     }
   ]
 }

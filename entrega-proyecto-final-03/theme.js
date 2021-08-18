@@ -7,12 +7,13 @@ function darkMode() {
                  .empty()
                  .append('<i class="fas fa-sun"></i>');
   $("body").css("background-color", "black");
-  $("h1").css("color", "aquamarine");
+  // $("h1").css("color", "aquamarine");
   $("h4").addClass("text-white");
   $("p").css("color", "white");
   $(".card").addClass("bg-dark");
   $(".card-text").addClass("text-light");
   $("input").addClass("bg-dark text-light");
+  $("select").addClass("bg-dark text-light");
   localStorage.setItem("theme", "dark");
 }
 
@@ -25,9 +26,10 @@ function lightMode() {
                  .empty()
                  .append('<i class="fas fa-moon"></i>');
   $("body").css("background-color", "white");
-  $("h1").css("color", "teal");
+  // $("h1").css("color", "teal");
   $("h4").removeClass("text-white");
   $("p").css("color", "black");
+  $("#slogan").css("color", "white");
   $(".card").removeClass("bg-dark");
   $(".card-text").removeClass("text-light");
   $("input").removeClass("bg-dark text-light");
@@ -44,8 +46,8 @@ function changeTheme() {
 
 $("#theme-btn").click(changeTheme);
 
-if (localStorage.getItem("theme") == "light") {
-  lightMode();
-} else {
+if (localStorage.getItem("theme") == "dark") {
   darkMode();
+} else {
+  lightMode();
 }
