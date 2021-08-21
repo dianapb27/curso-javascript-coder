@@ -1,6 +1,6 @@
 // Create Product class with constructor
 class Product {
-  constructor(name, description, type, color, brand, price, quantity, id) {
+  constructor(name, description, type, color, brand, price, quantity, id, imageUrl) {
     this.name = name.toUpperCase();
     this.description = `${description[0].toUpperCase()}${description.slice(1, description.count).toLowerCase()}`
     this.type = type.toUpperCase();
@@ -9,6 +9,7 @@ class Product {
     this.price = Number(price);
     this.quantity = Number(quantity);
     this.id = Number(id);
+    this.imageUrl = imageUrl;
   }
 }
 
@@ -174,19 +175,32 @@ function sellProduct(productId) {
 // Create a card for each product
 function createProductCard(product) {
   const card = document.createElement("div");
-  card.classList.add("card");
+  card.classList.add("card", "p-0", "m-3");
   if (localStorage.getItem("theme") == "dark") {
     card.classList.add("bg-dark");
   }
   card.setAttribute("style", "width: 25rem");
-  card.classList.add("m-3");
+
+  const productImage = document.createElement("img");
+  if (loadRequestedProducts().find(requested => requested.name == product.name)) {
+    productImage.setAttribute("src", "https://images.unsplash.com/photo-1616529484745-85f885b9889a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=749&q=80");
+  } else {
+    productImage.setAttribute("src", product.imageUrl);
+  }
+  productImage.setAttribute("alt", "Product image");
+  productImage.classList.add("product-img", "card-img-top");
+  card.appendChild(productImage);
+
+  const productInformationDiv = document.createElement("div");
+  productInformationDiv.classList.add("p-2");
+  card.appendChild(productInformationDiv);
 
   const productName = document.createElement("h4");
   productName.textContent = `${product.name}`;
   if (localStorage.getItem("theme") == "dark") {
     productName.classList.add("text-white");
   }
-  card.appendChild(productName);
+  productInformationDiv.appendChild(productName);
 
   const productPriceAndAvailability = document.createElement("div");
   if (loadRequestedProducts().find(requested => requested.name == product.name)) {
@@ -195,7 +209,7 @@ function createProductCard(product) {
     productPriceAndAvailability.textContent = `$${product.price} | Available: ${product.quantity}`;
   }
   productPriceAndAvailability.setAttribute("class", "card-subtitle mb-2 text-muted");
-  card.appendChild(productPriceAndAvailability);
+  productInformationDiv.appendChild(productPriceAndAvailability);
 
   const productDescription = document.createElement("div");
   productDescription.textContent = `${product.description}`;
@@ -203,7 +217,7 @@ function createProductCard(product) {
   if (localStorage.getItem("theme") == "dark") {
     productDescription.classList.add("text-light");
   }
-  card.appendChild(productDescription);
+  productInformationDiv.appendChild(productDescription);
 
   const productDetails = document.createElement("div");
   productDetails.textContent = `Type: ${product.type} | Brand: ${product.brand} | Color: ${product.color}`;
@@ -211,20 +225,20 @@ function createProductCard(product) {
   if (localStorage.getItem("theme") == "dark") {
     productDetails.classList.add("text-light");
   }
-  card.appendChild(productDetails);
+  productInformationDiv.appendChild(productDetails);
 
   const buyProduct = document.createElement("button");
   buyProduct.setAttribute("id", `btn-${product.id}`);
   if (loadRequestedProducts().find(requested => requested.name == product.name)) {
     buyProduct.textContent = "Coming soon";
-    buyProduct.setAttribute("class", "btn btn-outline-danger mt-3");
+    buyProduct.setAttribute("class", "btn btn-outline-danger mt-3 w-100");
     buyProduct.setAttribute("disabled", "true");
   } else {
     buyProduct.textContent = "Add 1 to basket";
     buyProduct.setAttribute("onclick", `sellProduct(${product.id})`);
-    buyProduct.setAttribute("class", "btn btn-outline-success mt-3");
+    buyProduct.setAttribute("class", "btn btn-outline-success mt-3 w-100");
   }
-  card.appendChild(buyProduct);
+  productInformationDiv.appendChild(buyProduct);
   
   return card;
 }

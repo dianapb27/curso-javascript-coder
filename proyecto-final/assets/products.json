@@ -2,13 +2,14 @@
   "products": [
     {
     "name": "Eyeshadow palette",
-    "description": "Beautiful tarte eyeshadow palette with earthy tones",
+    "description": "Beautiful tarte eyeshadow palette with shimmery tones",
     "type": "Makeup",
-    "color": "Earthy",
+    "color": "Various",
     "brand": "Tarte",
     "price": 500,
     "quantity": 3,
-    "id": 1
+    "id": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1533562389935-457b1ae48a39?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
     },
     {
       "name": "The Ordinary's niacinamide",
@@ -18,7 +19,8 @@
       "brand": "The Ordinary",
       "price": 300,
       "quantity": 5,
-      "id": 2
+      "id": 2,
+      "imageUrl": "https://images.unsplash.com/photo-1620351308307-41441731695f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80"
     },
     {
       "name": "Red lipstick",
@@ -28,7 +30,8 @@
       "brand": "Coulourpop",
       "price": 100,
       "quantity": 2,
-      "id": 3
+      "id": 3,
+      "imageUrl": "https://images.unsplash.com/photo-1613255348289-1407e4f2f980?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=358&q=80"
     },
     {
       "name": "Ouai detox shampoo",
@@ -38,7 +41,8 @@
       "brand": "Ouai",
       "price": 450,
       "quantity": 3,
-      "id": 4
+      "id": 4,
+      "imageUrl": "https://images.unsplash.com/photo-1620916927602-a0321af069e9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8b3VhaSUyMHNoYW1wb298ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
     },
     {
       "name": "Cool wine cooler",
@@ -48,7 +52,74 @@
       "brand": "Wine not?",
       "price": 250,
       "quantity": 1,
-      "id": 5
+      "id": 5,
+      "imageUrl": "https://images.unsplash.com/photo-1476754046683-66f13426257d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+    },
+    {
+      "name": "Morphe artistry palette",
+      "description": "Colorful artistry eyeshadow palette",
+      "type": "Makeup",
+      "color": "Various",
+      "brand": "Morphe",
+      "price": 600,
+      "quantity": 7,
+      "id": 6,
+      "imageUrl": "https://images.unsplash.com/photo-1596704017254-9b121068fb31?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=375&q=80"
+    },
+    {
+      "name": "Mermaid brushes",
+      "description": "Makeup brush set from Tarte",
+      "type": "Makeup tools",
+      "color": "Blue",
+      "brand": "Tarte",
+      "price": 430,
+      "quantity": 3,
+      "id": 7,
+      "imageUrl": "https://images.unsplash.com/photo-1587754256282-a11d04e3472d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=667&q=80"
+    },
+    {
+      "name": "Makeup box",
+      "description": "Carry all your makeup in this box",
+      "type": "Makeup tools",
+      "color": "Pink",
+      "brand": "Real Techniques",
+      "price": 720,
+      "quantity": 2,
+      "id": 8,
+      "imageUrl": "https://images.unsplash.com/photo-1600417118520-b87c3656c0d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80"
+    },
+    {
+      "name": "Setting powder",
+      "description": "Set your makeup with this matte powder",
+      "type": "Makeup",
+      "color": "Translucid",
+      "brand": "Nude by Nature",
+      "price": 260,
+      "quantity": 5,
+      "id": 9,
+      "imageUrl": "https://images.unsplash.com/photo-1531646317777-0619c7c5d1d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
+    },
+    {
+      "name": "Beauty tools",
+      "description": "Facial cleansing tools and massage jade roller",
+      "type": "Skincare tools",
+      "color": "White",
+      "brand": "Hema",
+      "price": 340,
+      "quantity": 3,
+      "id": 10,
+      "imageUrl": "https://images.unsplash.com/photo-1592136957897-b2b6ca21e10d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=751&q=80"
+    },
+    {
+      "name": "Hydration mist",
+      "description": "Botanical face and body mist to awake your skin",
+      "type": "Skincare",
+      "color": "Clear",
+      "brand": "Annmarie",
+      "price": 310,
+      "quantity": 6,
+      "id": 11,
+      "imageUrl": "https://images.unsplash.com/photo-1591135108731-615592cf231b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
     }
   ]
 }
