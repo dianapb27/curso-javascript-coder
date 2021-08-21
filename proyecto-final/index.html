@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <script
+      src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+      data-auto-a11y="true"
+    ></script>
+  <title>BeautyStore</title>
+</head>
+<body>
+
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1065&q=80);">
+    <div class="container">
+      <h1>Welcome to BeautyStore!</h1>
+      <p id="slogan">Where you can find products to make you feel and look beautiful</p>
+      <button id="theme-btn" class="btn btn-outline-info my-3"></button>
+      <button id="show-products" class="btn btn-primary mb-2">Show available products</button>
+      <button id="show-form" class="btn btn-info mb-2">Request products</button>
+    </div>
+  </div>
+
+  <div id="new-product-form" class="container w-50 my-3">
+    <form id="request-product-form" class="hidden">
+      <p id="name-ref" class="form-text d-none">Enter the name of the product</p>
+      <input type="text" id="product-name" class="form-control mb-3" autocomplete="off" placeholder="Name">
+      <p id="description-ref" class="form-text d-none">Enter a short description of the product</p>
+      <input type="text" id="product-description" class="form-control mb-3" autocomplete="off" placeholder="Description">
+      <p id="type-ref" class="form-text d-none">What type is the product (i.e., makeup, skincare, hair)?</p>
+      <select name="type" id="product-type" class="form-control mb-3">
+        <option value=""></option>
+        <option value="makeup">Makeup</option>
+        <option value="skincare">Skincare</option>
+        <option value="hair">Hair</option>
+        <option value="other">Other</option>
+      </select>
+      <p id="color-ref" class="form-text d-none">What color is the product?</p>
+      <input type="text" id="product-color" class="form-control mb-3" autocomplete="off" placeholder="Color">
+      <p id="brand-ref" class="form-text d-none">Enter the brand of the product</p>
+      <input type="text" id="product-brand" class="form-control mb-3" autocomplete="off" placeholder="Brand">
+      <p id="price-ref" class="form-text d-none">How much are you willing to pay for a unit of this product?</p>
+      <input type="number" id="product-price" class="form-control mb-3" autocomplete="off" placeholder="Price">
+      <p id="quantity-ref" class="form-text d-none">How many units would you like to request?</p>
+      <input type="number" id="product-quantity" class="form-control mb-3" autocomplete="off" placeholder="Quantity">
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <input type="submit" id="request-product-btn" class="btn btn-primary btn-block" value="Request a Product">
+      </div>
+    </form>
+  </div>
+
+  <div class="container">
+    <h4 class="hidden" id="available-header">These are the products we have in stock:</h4>
+    <div class="row" id="available">
+    </div>
+  </div>
+
+  <div class="container">
+    <h4 class="hidden" id="requested-header">These are the products you have requested:</h4>
+    <div class="row" id="requested">
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+          integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+          crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+  <script src="theme.js"></script>
+</body>
+</html>
