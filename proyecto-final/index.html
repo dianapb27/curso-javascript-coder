@@ -14,12 +14,35 @@
   <title>BeautyStore</title>
 </head>
 <body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-transparent justify-content-between sticky-top">
+    <div class="container">
+      <a class="navbar-brand mx-3 my-3" id="navbar-title" href="#">BeautyStore</a>
+      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+          aria-expanded="false" aria-label="Toggle navigation"></button>
+    </div>
+    <div class="container justify-content-end">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <button id="theme-btn" class="my-3 navbar-btn"></button>
+        </li>
+        <li class="nav-item">
+          <div class="my-3 navbar-btn" id="basket-div">
+            <a href="/#shopping-basket" id="basket" class="basket position-relative d-inline-flex" aria-label="View your shopping cart">
+              <i class="fas fa-shopping-basket"></i>
+              <span class="cart-basket d-flex align-items-center justify-content-center" id="basket-counter">
+                0
+              </span>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
   <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1065&q=80);">
     <div class="container">
       <h1>Welcome to BeautyStore!</h1>
       <p id="slogan">Where you can find products to make you feel and look beautiful</p>
-      <button id="theme-btn" class="btn btn-outline-info my-3"></button>
       <button id="show-products" class="btn btn-primary mb-2">Show available products</button>
       <button id="show-form" class="btn btn-info mb-2">Request products</button>
     </div>
@@ -64,6 +87,13 @@
     <div class="row" id="requested">
     </div>
   </div>
+
+  <section id="shopping-basket">
+    <div class="container hidden" id="basket-contents">
+      <hr>
+      <h4>Your shopping basket</h3>
+    </div>
+  </section>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
           integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 

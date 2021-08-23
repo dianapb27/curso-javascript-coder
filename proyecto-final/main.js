@@ -41,6 +41,8 @@ const quantityRef = document.getElementById("quantity-ref");
 
 const showProductsBtn = document.querySelector("#show-products");
 
+const basketCounter = document.getElementById("basket-counter");
+
 // Variables
 const jsonPath = "./assets/products.json";
 
@@ -161,6 +163,7 @@ function addtoBasket(productsList, productId) {
   basket.push(productMatch);
   saveBasket(basket);
   console.log(`You added 1 ${productMatch.name} to your basket`);
+  basketCounter.innerHTML = calculateBasketQuantity();
 }
 function sellProduct(productId) {
   let productsList = JSON.parse(localStorage.getItem("existingProducts"));
@@ -170,6 +173,16 @@ function sellProduct(productId) {
   displayAvailableProducts(productsList);
   addtoBasket(productsList, productId);
   console.log(`Your total so far is $${calculateTotal()}`);
+}
+
+// Calculate quantity in basket
+function calculateBasketQuantity() {
+  let quantity = 0;
+  let basket = loadBasket();
+  basket.forEach(product => {
+    quantity += product.quantity;
+  });
+  return quantity;
 }
 
 // Create a card for each product
@@ -348,3 +361,5 @@ if (JSON.parse(localStorage.getItem("existingProducts")) != null) {
   showProductsBtn.classList.add("d-none");
 }
 displayRequestedProducts(loadRequestedProducts());
+
+calculateBasketQuantity();

@@ -3,11 +3,7 @@
 }
 
 #theme-btn {
-  height: 50px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: rgba(127, 255, 212, 0.507);
+  font-size: 1.2rem;
 }
 
 .banner {
@@ -38,3 +34,41 @@
   object-position: center;
   box-shadow: 0 5px 10px gray;
 }
+
+a.basket {
+  font-size: 1.5rem;
+  color: turquoise;
+}
+a.basket:hover {
+  text-decoration: none;
+  color: teal;
+}
+
+a.basket .cart-basket {
+  font-size: 0.8rem;
+  position: absolute;
+  top: -6px;
+  right: -5px;
+  width: 17px;
+  height: 17px;
+  color: #fff;
+  background-color: #ef476f;
+  border-radius: 50%;
+}
+
+li {
+  margin-left: 10px;
+}
+
+.navbar-btn {
+  outline: none;
+  background-color: transparent;
+  border: none;
+}
+/* 
+#basket-div {
+  position: absolute;
+  top: 90px;
+  right: 10px;
+  z-index: 1000;
+} */
