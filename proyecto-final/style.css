@@ -65,6 +65,10 @@ li {
   background-color: transparent;
   border: none;
 }
+
+#logo {
+  height: 50px;
+}
 /* 
 #basket-div {
   position: absolute;

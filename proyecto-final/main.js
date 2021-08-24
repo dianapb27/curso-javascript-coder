@@ -156,22 +156,25 @@ function requestProduct(e) {
 }
 
 // Add 1 unit to the basket and subtract one from the available qty
-function addtoBasket(productsList, productId) {
+function addtoBasket(productsList, productId, quantity) {
   let basket = loadBasket();
   let productMatch = productsList.find(product => product.id == productId);
-  productMatch.quantity = 1;
+  productMatch.quantity = Number(quantity);
   basket.push(productMatch);
   saveBasket(basket);
-  console.log(`You added 1 ${productMatch.name} to your basket`);
+  console.log(`You added ${quantity} ${productMatch.name} to your basket`);
   basketCounter.innerHTML = calculateBasketQuantity();
 }
-function sellProduct(productId) {
+function sellProduct(e, productId) {
+  e.preventDefault;
+  let quantity = document.getElementById(`quantity-${productId}`).value;
+  console.log(quantity);
   let productsList = JSON.parse(localStorage.getItem("existingProducts"));
   let productMatch = productsList.find(product => product.id == productId);
-  productMatch.quantity -= 1;
+  productMatch.quantity -= Number(quantity);
   saveExistingProductsList(productsList);
   displayAvailableProducts(productsList);
-  addtoBasket(productsList, productId);
+  addtoBasket(productsList, productId, quantity);
   console.log(`Your total so far is $${calculateTotal()}`);
 }
 
@@ -240,6 +243,22 @@ function createProductCard(product) {
   }
   productInformationDiv.appendChild(productDetails);
 
+  const quantityInputForm = document.createElement("form");
+  const quantityLabel = document.createElement("label");
+  const quantityInput = document.createElement("input");
+  if (loadRequestedProducts().find(requested => requested.name == product.name) == null) {
+    quantityLabel.textContent = "Quantity";
+    quantityLabel.classList.add("form-text");
+    quantityInputForm.appendChild(quantityLabel);
+    quantityInput.setAttribute("type", "number");
+    quantityInput.setAttribute("id", `quantity-${product.id}`);
+    quantityInput.setAttribute("min", "1");
+    quantityInput.setAttribute("max", `${product.quantity}`);
+    quantityInput.setAttribute("class", "form-control w-25");
+    quantityInputForm.appendChild(quantityInput);
+    productInformationDiv.appendChild(quantityInputForm);
+  }
+
   const buyProduct = document.createElement("button");
   buyProduct.setAttribute("id", `btn-${product.id}`);
   if (loadRequestedProducts().find(requested => requested.name == product.name)) {
@@ -247,8 +266,8 @@ function createProductCard(product) {
     buyProduct.setAttribute("class", "btn btn-outline-danger mt-3 w-100");
     buyProduct.setAttribute("disabled", "true");
   } else {
-    buyProduct.textContent = "Add 1 to basket";
-    buyProduct.setAttribute("onclick", `sellProduct(${product.id})`);
+    buyProduct.textContent = "Add to basket";
+    buyProduct.setAttribute("onclick", `sellProduct("e", ${product.id})`);
     buyProduct.setAttribute("class", "btn btn-outline-success mt-3 w-100");
   }
   productInformationDiv.appendChild(buyProduct);
@@ -362,4 +381,7 @@ if (JSON.parse(localStorage.getItem("existingProducts")) != null) {
 }
 displayRequestedProducts(loadRequestedProducts());
 
-calculateBasketQuantity();
+// Display quantity in the basket
+if (basketCounter.innerHTML == 0) {
+  basketCounter.innerHTML = calculateBasketQuantity();
+}

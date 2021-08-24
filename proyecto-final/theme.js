@@ -14,7 +14,6 @@ function darkMode() {
   $(".card-text").addClass("text-light");
   $("input").addClass("bg-dark text-light");
   $("select").addClass("bg-dark text-light");
-  $("#navbar-title").removeClass("text-dark");
   localStorage.setItem("theme", "dark");
 }
 
@@ -35,7 +34,6 @@ function lightMode() {
   $(".card-text").removeClass("text-light");
   $("input").removeClass("bg-dark text-light");
   $("select").removeClass("bg-dark text-light");
-  $("#navbar-title").addClass("text-dark");
   localStorage.setItem("theme", "light");
 }
 
