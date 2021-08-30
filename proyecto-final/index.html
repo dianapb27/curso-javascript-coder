@@ -11,6 +11,7 @@
       src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
       data-auto-a11y="true"
     ></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <title>BeautyStore</title>
 </head>
 <body>
@@ -27,7 +28,7 @@
         </li>
         <li class="nav-item">
           <div class="my-3 navbar-btn" id="basket-div">
-            <a href="#shopping-basket" id="basket" class="basket position-relative d-inline-flex" aria-label="View your shopping cart">
+            <a href="#shopping-basket" id="basket-btn" class="basket position-relative d-inline-flex" aria-label="View your shopping cart">
               <i class="fas fa-shopping-basket"></i>
               <span class="cart-basket d-flex align-items-center justify-content-center" id="basket-counter">
                 0
@@ -89,11 +90,24 @@
   </div>
 
   <section id="shopping-basket">
-    <div class="container hidden" id="basket-contents">
+    <div class="container hidden" id="basket-list">
       <hr>
-      <h4>Your shopping basket</h3>
+      <h4>Your shopping basket</h4>
     </div>
   </section>
+
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="basketToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">BeautyStore</strong>
+        <small>just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Your product was added to your basket!
+      </div>
+    </div>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
           integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 

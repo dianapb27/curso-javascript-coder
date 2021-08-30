@@ -42,6 +42,10 @@ const quantityRef = document.getElementById("quantity-ref");
 const showProductsBtn = document.querySelector("#show-products");
 
 const basketCounter = document.getElementById("basket-counter");
+const basketBtn = document.getElementById("basket-btn");
+
+const basketList = document.getElementById("basket-list");
+// const basketContents = document.getElementById("basket-contents");
 
 // Variables
 const jsonPath = "./assets/products.json";
@@ -129,7 +133,7 @@ function calculateTotal() {
   let basket = loadBasket();
   let total = 0;
   for (const product of basket) {
-    total += product.price
+    total += product.price * product.quantity;
   }
   return total
 }
@@ -152,7 +156,9 @@ function requestProduct(e) {
   saveRequestedProductsList(productsList);
   requestProductForm.reset();
   displayRequestedProducts(productsList);
-  console.log("Our team will work on finding your product!");
+  swal(`Our team will work on finding ${newProductName}!`, "Please come back soon!", "info", {
+    button: "Sounds like a plan!",
+  });
 }
 
 // Add 1 unit to the basket and subtract one from the available qty
@@ -162,20 +168,21 @@ function addtoBasket(productsList, productId, quantity) {
   productMatch.quantity = Number(quantity);
   basket.push(productMatch);
   saveBasket(basket);
-  console.log(`You added ${quantity} ${productMatch.name} to your basket`);
   basketCounter.innerHTML = calculateBasketQuantity();
+  displayBasket();
 }
 function sellProduct(e, productId) {
   e.preventDefault;
   let quantity = document.getElementById(`quantity-${productId}`).value;
-  console.log(quantity);
   let productsList = JSON.parse(localStorage.getItem("existingProducts"));
   let productMatch = productsList.find(product => product.id == productId);
   productMatch.quantity -= Number(quantity);
   saveExistingProductsList(productsList);
   displayAvailableProducts(productsList);
   addtoBasket(productsList, productId, quantity);
-  console.log(`Your total so far is $${calculateTotal()}`);
+  let newToast = document.getElementById("basketToast");
+  let toast = new bootstrap.Toast(newToast);
+  toast.show();
 }
 
 // Calculate quantity in basket
@@ -255,6 +262,9 @@ function createProductCard(product) {
     quantityInput.setAttribute("min", "1");
     quantityInput.setAttribute("max", `${product.quantity}`);
     quantityInput.setAttribute("class", "form-control w-25");
+    if (localStorage.getItem("theme") == "dark") {
+      quantityInput.classList.add("bg-dark", "text-light");
+    }
     quantityInputForm.appendChild(quantityInput);
     productInformationDiv.appendChild(quantityInputForm);
   }
@@ -275,6 +285,72 @@ function createProductCard(product) {
   return card;
 }
 
+// Display shopping basket
+function displayBasket() {
+  let basketContents = document.createElement("div");
+  $("#basket-list > div").empty();
+  let basket = loadBasket();
+  basketList.classList.remove("hidden");
+  if (basket.length == 0) {
+    let warning = document.createElement("p");
+    warning.setAttribute("class", "text-warning");
+    warning.textContent = "You don't have anything in your basket ☹"
+    basketContents.appendChild(warning);
+  } else {
+    let basketList = document.createElement("ul");
+    basketList.setAttribute("class", "list-group list-group-flush");
+    basketContents.appendChild(basketList);
+    basket.forEach(product => {
+      let element = document.createElement("li");
+      element.setAttribute("class", "list-group-item");
+      if (localStorage.getItem("theme") == "dark") {
+        element.classList.add("bg-dark", "text-light");
+      }
+      element.textContent = `${product.name} | Qty: ${product.quantity} | Unit Price: $${product.price} | Subtotal: $${product.quantity * product.price}`;
+      basketList.appendChild(element);
+    })
+    let totalPrice = document.createElement("h5");
+    totalPrice.setAttribute("class", "my-3");
+    if (localStorage.getItem("theme") == "dark") {
+      totalPrice.classList.add("text-light");
+    }
+    let totalText = document.createElement("span");
+    totalText.textContent = `$${calculateTotal()}`
+    totalPrice.textContent = "Your total today is: ";
+    totalPrice.appendChild(totalText);
+    basketContents.appendChild(totalPrice);
+    let purchaseBtn = document.createElement("button");
+    purchaseBtn.setAttribute("class", "btn btn-primary mb-5 pr-3");
+    purchaseBtn.textContent = "Complete purchase";
+    purchaseBtn.setAttribute("onclick", "completePurchase()");
+    basketContents.appendChild(purchaseBtn);
+    let removeBtn = document.createElement("button");
+    removeBtn.setAttribute("class", "btn btn-danger mb-5");
+    removeBtn.textContent = "Empty basket";
+    removeBtn.setAttribute("onclick", "emptyBasket()");
+    basketContents.appendChild(removeBtn);
+  }
+  basketList.appendChild(basketContents);
+}
+
+function completePurchase() {
+  sessionStorage.clear();
+  basketList.classList.add("hidden");
+  basketCounter.innerHTML = calculateBasketQuantity();
+  swal("Thank you for your purchase!", "You're awesome 🎉😊", "success", {
+    button: "Yasss!",
+  });
+}
+
+function emptyBasket() {
+  sessionStorage.clear();
+  basketList.classList.add("hidden");
+  basketCounter.innerHTML = calculateBasketQuantity();
+  swal("We're sorry to see you go! 😞", "Come back soon!", "info", {
+    button: "Promise I will!",
+  });
+}
+
 // Display available (quantity > 0) products if there are any
 function displayAvailableProducts(productsList) {
   let availableProductsDiv = document.getElementById("available");
@@ -287,6 +363,7 @@ function displayAvailableProducts(productsList) {
   });
 }
 
+// Display products that have been requested by the user through the form
 function displayRequestedProducts(productsList) {
   let requestedProductsDiv = document.getElementById("requested");
   let requestedHeader = document.getElementById("requested-header");
@@ -359,6 +436,9 @@ requestProductForm.addEventListener("submit", requestProduct);
 // Getting the initial list of available products from JSON file
 showProductsBtn.addEventListener("click", loadExistingProducts);
 
+// Displaying the basket
+basketBtn.addEventListener("click", displayBasket);
+
 // Show and hide form references
 nameInput.addEventListener("focus", displayRefName);
 nameInput.addEventListener("blur", hideRefName);
@@ -375,6 +455,7 @@ priceInput.addEventListener("blur", hideRefPrice);
 quantityInput.addEventListener("focus", displayRefQuantity);
 quantityInput.addEventListener("blur", hideRefQuantity);
 
+// Starting functions
 if (JSON.parse(localStorage.getItem("existingProducts")) != null) {
   displayAvailableProducts(JSON.parse(localStorage.getItem("existingProducts")));
   showProductsBtn.classList.add("d-none");

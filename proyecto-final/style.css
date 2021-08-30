@@ -69,6 +69,11 @@ li {
 #logo {
   height: 50px;
 }
+
+span {
+  color: rgb(25, 160, 160);
+  font-weight: bolder;
+}
 /* 
 #basket-div {
   position: absolute;
