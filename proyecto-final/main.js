@@ -161,7 +161,7 @@ function requestProduct(e) {
   });
 }
 
-// Add 1 unit to the basket and subtract one from the available qty
+// Add quantity to the basket and subtract it from the available qty
 function addtoBasket(productsList, productId, quantity) {
   let basket = loadBasket();
   let productMatch = productsList.find(product => product.id == productId);
@@ -302,17 +302,26 @@ function displayBasket() {
     basketContents.appendChild(basketList);
     basket.forEach(product => {
       let element = document.createElement("li");
-      element.setAttribute("class", "list-group-item");
+      element.setAttribute("class", "list-group-item d-flex justify-content-between");
       if (localStorage.getItem("theme") == "dark") {
         element.classList.add("bg-dark", "text-light");
       }
       element.textContent = `${product.name} | Qty: ${product.quantity} | Unit Price: $${product.price} | Subtotal: $${product.quantity * product.price}`;
+      let imgDiv = document.createElement("div");
+      imgDiv.classList.add("img-div");
+      let img = document.createElement("img");
+      img.classList.add("img-fluid", "basket-img");
+      img.setAttribute("src", `${product.imageUrl}`);
+      imgDiv.appendChild(img);
+      element.appendChild(imgDiv);
       basketList.appendChild(element);
     })
     let totalPrice = document.createElement("h5");
     totalPrice.setAttribute("class", "my-3");
     if (localStorage.getItem("theme") == "dark") {
       totalPrice.classList.add("text-light");
+    } else {
+      totalPrice.classList.remove("text-light");
     }
     let totalText = document.createElement("span");
     totalText.textContent = `$${calculateTotal()}`
@@ -320,7 +329,7 @@ function displayBasket() {
     totalPrice.appendChild(totalText);
     basketContents.appendChild(totalPrice);
     let purchaseBtn = document.createElement("button");
-    purchaseBtn.setAttribute("class", "btn btn-primary mb-5 pr-3");
+    purchaseBtn.setAttribute("class", "btn btn-info mb-5 pr-3");
     purchaseBtn.textContent = "Complete purchase";
     purchaseBtn.setAttribute("onclick", "completePurchase()");
     basketContents.appendChild(purchaseBtn);
@@ -333,6 +342,7 @@ function displayBasket() {
   basketList.appendChild(basketContents);
 }
 
+// Simulate the completion of a purchase
 function completePurchase() {
   sessionStorage.clear();
   basketList.classList.add("hidden");
@@ -342,6 +352,7 @@ function completePurchase() {
   });
 }
 
+// Simulate emptying the entire basket
 function emptyBasket() {
   sessionStorage.clear();
   basketList.classList.add("hidden");
@@ -455,7 +466,9 @@ priceInput.addEventListener("blur", hideRefPrice);
 quantityInput.addEventListener("focus", displayRefQuantity);
 quantityInput.addEventListener("blur", hideRefQuantity);
 
-// Starting functions
+// Starting functions --------------------------------------------------------
+
+// Check if there are existing and requested products in the local storage 
 if (JSON.parse(localStorage.getItem("existingProducts")) != null) {
   displayAvailableProducts(JSON.parse(localStorage.getItem("existingProducts")));
   showProductsBtn.classList.add("d-none");

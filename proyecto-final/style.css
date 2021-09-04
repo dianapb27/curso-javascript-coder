@@ -74,10 +74,13 @@ span {
   color: rgb(25, 160, 160);
   font-weight: bolder;
 }
-/* 
-#basket-div {
-  position: absolute;
-  top: 90px;
-  right: 10px;
-  z-index: 1000;
-} */
+
+.img-div {
+  max-width: 40px;
+  max-height: 20px;
+}
+
+.basket-img {
+  object-fit: cover;
+  object-position: center;
+}
