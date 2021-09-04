@@ -179,10 +179,16 @@ function sellProduct(e, productId) {
   productMatch.quantity -= Number(quantity);
   saveExistingProductsList(productsList);
   displayAvailableProducts(productsList);
-  addtoBasket(productsList, productId, quantity);
-  let newToast = document.getElementById("basketToast");
-  let toast = new bootstrap.Toast(newToast);
-  toast.show();
+  if (quantity > 0) {
+    addtoBasket(productsList, productId, quantity);
+    let newToast = document.getElementById("basketToast");
+    let toast = new bootstrap.Toast(newToast);
+    toast.show();
+  } else {
+    swal(`You know you want the ${productMatch.name}!`, "Please tell us how many 👀", "info", {
+      button: "My bad!"
+    });
+  }
 }
 
 // Calculate quantity in basket
@@ -298,22 +304,23 @@ function displayBasket() {
     basketContents.appendChild(warning);
   } else {
     let basketList = document.createElement("ul");
-    basketList.setAttribute("class", "list-group list-group-flush");
+    basketList.setAttribute("class", "list-group list-group-flush w-75");
     basketContents.appendChild(basketList);
     basket.forEach(product => {
       let element = document.createElement("li");
-      element.setAttribute("class", "list-group-item d-flex justify-content-between");
+      element.setAttribute("class", "list-group-item d-flex");
       if (localStorage.getItem("theme") == "dark") {
         element.classList.add("bg-dark", "text-light");
       }
-      element.textContent = `${product.name} | Qty: ${product.quantity} | Unit Price: $${product.price} | Subtotal: $${product.quantity * product.price}`;
       let imgDiv = document.createElement("div");
-      imgDiv.classList.add("img-div");
       let img = document.createElement("img");
       img.classList.add("img-fluid", "basket-img");
       img.setAttribute("src", `${product.imageUrl}`);
       imgDiv.appendChild(img);
       element.appendChild(imgDiv);
+      let text = document.createElement("p");
+      text.textContent = `${product.name} | Qty: ${product.quantity} | Unit Price: $${product.price} | Subtotal: $${product.quantity * product.price}`;
+      element.appendChild(text);
       basketList.appendChild(element);
     })
     let totalPrice = document.createElement("h5");
@@ -357,7 +364,7 @@ function emptyBasket() {
   sessionStorage.clear();
   basketList.classList.add("hidden");
   basketCounter.innerHTML = calculateBasketQuantity();
-  swal("We're sorry to see you go! 😞", "Come back soon!", "info", {
+  swal("We're sorry to see you go! 😞", "Come back soon!", "warning", {
     button: "Promise I will!",
   });
 }
